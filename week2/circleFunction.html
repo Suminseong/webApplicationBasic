@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수가 된 원주구하기</title>
+</head>
+<body>
+    <h1>Hello World!</h1>
+</body>
+<script>
+    let input = prompt('원의 반지름을 입력해주세요', 10);
+    let r = Number(input);
+
+    let result = calculator(r);
+
+    console.log('원의 반지름은' + result + '입니다.');
+
+    function calculator(rad) {
+        let pi = 3.1415926535;
+        let l = 2 * pi * rad;
+
+        return l;
+    }
+</script>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>밥타임?</title>
+</head>
+<body>
+    <h1>Halo World!</h1>
+</body>
+<script>
+    let input = prompt('지금 몇시에용?', 12);
+    let time = Number(input);
+
+    if (time < 11) {
+        console.log('아침밥!');
+    }
+    else if (time < 15) {
+        console.log('점심밥!');
+    }
+    else if (time < 20) {
+        console.log('저녁밥!');
+    }
+    else {
+        console.log('잘 시간이야!');
+    }
+</script>
+</html>

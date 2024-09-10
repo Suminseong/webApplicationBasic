@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI 계산기</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let height = Number(prompt('센티미터 키 입력', 170));
+    let weight = Number(prompt('킬로그램 체중 입력', 73));
+
+    let bmi = calculator(height, weight);
+
+    document.body.innerText = (`당신의 bmi는 ${bmi}입니다.`);
+
+    function calculator(h, w){
+        let result = (w ** 2) / h ;
+        return result;
+    }
+</script>
+</html>

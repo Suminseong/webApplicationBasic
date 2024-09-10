@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열로 알아보기</title>
+</head>
+<body>
+    <h1>Hala Waldo!</h1>
+</body>
+<script>
+    let weeklyWork = ['프로토타이핑', '웹어플구현', '선행인터랙', '인현사', '출근'];
+
+    let p = 1; //p는 ~~번째 숫자를 1부터 시작하게 만듬.
+    for(let i in weeklyWork){
+        console.log(`${p}번째 날의 업무는 ${weeklyWork[i]}입니다.`);
+        p ++;
+    }
+</script>
+</html>
