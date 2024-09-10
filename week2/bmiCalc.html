@@ -17,7 +17,7 @@
     document.body.innerText = (`당신의 bmi는 ${bmi}입니다.`);
 
     function calculator(h, w){
-        let result = (w ** 2) / h ;
+        let result = w / (h/100) ** 2 ;
         return result;
     }
 </script>
