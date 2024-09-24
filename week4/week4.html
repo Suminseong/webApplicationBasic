@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+    .done {
+        color: red;
+    }
+</style>
+
+<body>
+    <h1>오늘 할 일</h1>
+    <ul id="todoList">
+        <li class="work"><span class="icon">O</span><span class="text"></span></li>
+        <li class="work"><span class="icon">O</span><span class="text"></span></li>
+        <li class="work"><span class="icon">O</span><span class="text"></span></li>
+        <li class="work"><span class="icon">O</span><span class="text"></span></li>
+    </ul>
+</body>
+<script>
+    //기능1, 할 일 추가하기
+    //기능2, 삭제 버튼 눌러 없애버리기
+    //기능3, 클릭하여 중요 업무 표시하기
+    $(function () {
+        $('#todoList > li').each(function (index, item) {
+            let input = prompt((index + 1) + '번째 할 일을 입력하시오');
+            $(item).text(input);
+        });
+        $('#todoList > li').click(function () {
+            $(this).toggleClass('done');
+        });
+    });
+</script>
+
+</html>
