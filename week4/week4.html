@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 </head>
@@ -20,18 +22,48 @@
         align-items: center;
         gap: 30px;
     }
-    .done {
-        color: red;
+
+    ul {
+        width: 640px;
+    }
+
+    li{
+        list-style-type: none;
+        height: 30px;
+        width: 100%;
+        display: flex;
+        opacity: 1;
+        transition: opacity 0.5 ease-in-out;
+    }
+
+    li .icon {
+        background-color: #ff6640;
+        text-align: center;
+        width: 100px;
+    }
+
+    li .text {
+        width: 440px;
+        padding-left: 20px;
+        background-color: #e0e0e0;
+    }
+
+    li .material-symbols-outlined {
+        width: 100px;
+    }
+
+    .cleared{
+        opacity: 0.5;
     }
 </style>
 
 <body>
     <h1>오늘 할 일</h1>
     <ul id="todoList">
-        <li class="work"><span class="icon">O</span><span class="text"></span></li>
-        <li class="work"><span class="icon">O</span><span class="text"></span></li>
-        <li class="work"><span class="icon">O</span><span class="text"></span></li>
-        <li class="work"><span class="icon">O</span><span class="text"></span></li>
+        <li class="work"><span class="icon">✔️</span><span class="text"></span><span class="material-symbols-outlined">delete</span></li>
+        <li class="work"><span class="icon">✔️</span><span class="text"></span><span class="material-symbols-outlined">delete</span></li>
+        <li class="work"><span class="icon">✔️</span><span class="text"></span><span class="material-symbols-outlined">delete</span></li>
+        <li class="work"><span class="icon">✔️</span><span class="text"></span><span class="material-symbols-outlined">delete</span></li>
     </ul>
 </body>
 <script>
@@ -41,10 +73,56 @@
     $(function () {
         $('#todoList > li').each(function (index, item) {
             let input = prompt((index + 1) + '번째 할 일을 입력하시오');
-            $(item).text(input);
+            $(item).find('.text').text(input);
         });
-        $('#todoList > li').click(function () {
-            $(this).toggleClass('done');
+
+        $('#todoList > li .material-symbols-outlined').click(function (e) {
+            e.stopPropagation(); //부모인 li 클래스의 클릭과 중복되는 문제를 해결
+
+            $(this).closest('li').toggleClass('cleared')
+
+            if ($(this).text() === 'delete') {
+                $(this).text('cycle');
+            } else {
+                $(this).text('delete');
+            }
+        });
+
+        $('#todoList > li > .icon').click(function () {
+            if ($(this).text() === '✔️') {
+                $(this).text('❌');
+                $(this).css('background-color', 'dimgray')
+            } else {
+                $(this).text('✔️');
+                $(this).css('background-color', '#ff6640')
+            }
+
+        })
+
+        $('#todoList > li > .text').click(function () { //글자 수정 파트. GPT 활용하여 글자 입력 방법 확인
+            let currentText = $(this).text(); 
+            let input = $('<input type="text">').val(currentText); 
+
+            input.css({ //input필드의 스타일을 기존 text와 최대한 유사하게
+                'font-size': $(this).css('font-size'),
+                'font-family': $(this).css('font-family'),
+                'color': $(this).css('color'),
+                'width': $(this).width(),  
+                'border': '1px solid #ccc', 
+                'padding': '2px', 
+                'margin-left': '20px',
+                'box-sizing': 'border-box'  
+            });
+
+            $(this).replaceWith(input);
+
+            input.focus().keypress(function (e) {
+                if (e.which === 13) { 
+                    let newText = $(this).val(); 
+                    let span = $('<span class="text"></span>').text(newText); 
+                    $(this).replaceWith(span); 
+                }
+            });
         });
     });
 </script>
