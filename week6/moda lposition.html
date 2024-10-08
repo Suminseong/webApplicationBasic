@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        #modal{
+            position: absolute;
+            width: 300px;
+            height: 200px;
+            background-color: yellow;
+            border: 10px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">Position Test</h1>
+    <div id="modal"></div>
+</body>
+<script>
+function updateModalPosition() {
+    let docuWidth = $('body').innerWidth();
+    let docuHeight = $('body').innerHeight();
+    let modalWidth = $('#modal').outerWidth();
+    let modalHeight = $('#modal').outerHeight();
+
+    $('#modal').css('left', docuWidth / 2 - modalWidth / 2);
+    $('#modal').css('top', docuHeight / 2 - modalHeight / 2);
+
+    let modalLeft = $('#modal').offset().left;
+    let modalTop = $('#modal').offset().top;
+
+    $('#modal').text(modalLeft.toFixed(1) + ', ' + modalTop.toFixed(1));
+}
+
+$(window).on('resize', updateModalPosition);
+$(document).on('mousemove', updateModalPosition);
+
+// Initial call to position modal
+updateModalPosition();
+</script>
+</html>
+
