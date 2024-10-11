@@ -113,7 +113,8 @@
     //기능1 : 메시지 전송 버튼 누르면 입력칸 비워지고 채팅공간에 메시지 띄우기
     //기능2 : 메시지 버튼 눌린 후 1초 뒤에 봇이 메시지 출력
     //기능3 : 엔터 키 입력받으면 메시지 전송 되게
-    $(document).ready(function () {
+    $(document).ready(function () { 
+        //ready의 용도 : DOM 로드 이후에 코드를 불러오게 함. 여기서는 굳이 필요 없지만, 스크립트 파일을 따로 빼거나 할 때 오류 방지 목적
         //메시지 전송부
         function sendMessage() {
             var message = $('#message-input').val();
