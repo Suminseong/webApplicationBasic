@@ -125,32 +125,28 @@
         </div>
 
         <div id="tag">
-            <div>이문환</div>
-            <div>김한종</div>
-            <div>권오재</div>
+            <div>주시윤</div>
+            <div>유미나</div>
+            <div>양하림</div>
         </div>
     </div>
-
-    
     
 </body>
 <script>
-    //기능1 : 메시지 전송 버튼 누르면 입력칸 비워지고 채팅공간에 메시지 띄우기
-    //기능2 : 메시지 버튼 눌린 후 1초 뒤에 봇이 메시지 출력
-    //기능3 : 엔터 키 입력받으면 메시지 전송 되게
+    
     $(document).ready(function () { 
-        //ready의 용도 : DOM 로드 이후에 코드를 불러오게 함. 여기서는 굳이 필요 없지만, 스크립트 파일을 따로 빼거나 할 때 오류 방지 목적
-        //메시지 전송부
+        
         function sendMessage() {
             var message = $('#message-input').val();
             if (message.trim() !== "") {
+                $('.chat-bubble').last().animate({'margin-bottom': -5}, 100).animate({'margin-bottom': 0}, 100) // 내가 채팅을 보내면 위아래로 흔들
                 $('#chat-area').append('<div class="chat-bubble user">' + message + '</div>');
-                $('#message-input').val(''); //입력칸 비우기
+                $('#message-input').val(''); 
                 scrollToBottom(); 
 
-                //봇
-                setTimeout(function () {
+                setTimeout(function () { //봇
                     $('#chat-area').append('<div class="chat-bubble bot">너 지금 ' + message + '라고 한거 다 알아.</div>')
+                    $('.bot').last().animate({'margin-left': 5}, 100).animate({'margin-left': 0}, 100);//봇이 채팅을 보내면 글자 옆으로 흔들
                     scrollToBottom();
                 }, 1000);
             }
@@ -160,7 +156,6 @@
         function scrollToBottom() {
             var chatArea = $('#chat-area');
             chatArea.scrollTop(chatArea.prop("scrollHeight"));
-            $('.chat-bubble').last().animate({'margin-left': 5}, 100).animate({'margin-left': 0}, 100);
         }
         //마우스 클릭
         $('#send-button').click(function() {
