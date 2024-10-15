@@ -143,7 +143,7 @@
         })
         //키보드 입력
         $('#message-input').keypress(function(e) {
-            if (e.which == 13) {
+            if (e.keyCode == 13) {
                 sendMessage()
             }
         })
