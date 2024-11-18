@@ -53,9 +53,6 @@
                 <div class="nav">
                     <p id="weekly">주간예보</p>
                 </div>
-                <div class="nav">
-                    <p id="rainCast">강수예측</p>
-                </div>
             </div>
             <div class="container" style="z-index: -1000;">
                 <div class="info-card-main"><!--밑에서 처음부터 보이는 친구-->
@@ -90,6 +87,64 @@
                             <div class="gascont">
                                 <p class="p-10px">습도</p>
                                 <p class="p-14px" id="hum"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-card-sub">
+                    <p class="title">가시거리</p>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="view-range">
+                                <p class="p-10px">가시거리</p>
+                                <p class="p-10px">시정</p>
+                            </div>
+                            <div class="view-value">
+                                <p class="p-16px visibility"></p>
+                                <p class="p-16px visiStat"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-card-sub">
+                    <p class="title">풍량예보</p>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="wind-range">
+                                <p class="p-10px">현위치</p>
+                                <p class="p-16px date"></p>
+                            </div>
+                            <div class="wind-value">
+                                <img src="icon/wind.png">
+                                <div class="vel">
+                                    <p class="p-10px">풍속</p>
+                                    <p id="velocity" class="p-16px"></p>
+                                </div>
+                                <div class="press">
+                                    <p class="p-10px">기압</p>
+                                    <p id="pressure" class="p-16px"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container2" style="display: none;">
+                <div class="info-card-sub">
+                    <p class="title">주간 예보</p>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="line1">
+                                <p class="p-14px">이번주 날씨</p>
+                            </div>
+                            <div class="line2">
+                                <p class="p-16px date"></p>
+                            </div>
+                            <div class="weekly-cont">
+                                <div class="weekly-daycont" id="weekly-forecast">
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -152,39 +207,6 @@
                     </div>
 
                 </div>
-                <div class="info-card-sub">
-                    <p class="title">가시거리</p>
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="view-range">
-                                <p class="p-10px">가시거리</p>
-                                <p class="p-10px">시정</p>
-                            </div>
-                            <div class="view-value">
-                                <p class="p-16px visibility"></p>
-                                <p class="p-16px visiStat"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container2" style="display: none;">
-                <div class="info-card-sub">
-                    <p class="title">주간 예보</p>
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="line1">
-                                <p class="p-14px">이번주 날씨</p>
-                            </div>
-                            <div class="line2">
-                                <p class="p-16px date"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container3" style="display: none;">
-                <p>여기는 강수 예측입니다!</p>
             </div>
         </div>
 
@@ -230,6 +252,32 @@
 
                 // 드래그 종료
                 $('.container').on('mouseup touchend', function () {
+                    if (!isDrag) return;
+                    isDrag = false;
+                    currentTranslateY = parseFloat($(this).css('transform').split(',')[5]) || 90;
+                });
+
+                $('.container2').on('mousedown touchstart', function (e) {
+                    if (!isToggled) return; // 토글이 활성화된 경우에만 드래그 허용
+                    isDrag = true;
+                    startY = e.pageY || e.originalEvent.touches[0].pageY;
+                });
+
+                // 드래그 중
+                $('.container2').on('mousemove touchmove', function (e) {
+                    if (!isDrag) return;
+                    let currentY = e.pageY || e.originalEvent.touches[0].pageY;
+                    let diffY = currentY - startY;
+                    let newTranslateY = currentTranslateY + diffY;
+
+                    // translateY 값 제한 (예: 90px ~ -300px 사이로 제한)
+                    newTranslateY = Math.max(-300, Math.min(90, newTranslateY));
+
+                    $(this).css('transform', `translateY(${newTranslateY}px)`);
+                });
+
+                // 드래그 종료
+                $('.container2').on('mouseup touchend', function () {
                     if (!isDrag) return;
                     isDrag = false;
                     currentTranslateY = parseFloat($(this).css('transform').split(',')[5]) || 90;
@@ -352,6 +400,8 @@
                     currentAnimation.play();
                 }
 
+
+
                 // 날씨 데이터 가져오기 및 UI 업데이트
                 function fetchWeatherData(lat, lng) {
                     const apiKey = "25b7bd10b57e76dec116bf982ffca3dd";
@@ -368,10 +418,14 @@
                         const temp = data.main.temp;
                         const iconCode = data.weather[0].icon;
                         const weatherStatus = getWeatherStatus(iconCode);
+                        const wind = data.wind.speed;
+                        const press = data.main.pressure;
+
                         let dt = data.dt
 
                         const date = moment(dt * 1000).format('YYYY년 MM월 DD일');
                         const time = moment(dt * 1000).format('hh:mm A')
+
 
                         // lottie 애니메이션 업데이트
                         updateLottieAnimation(iconCode);
@@ -387,6 +441,8 @@
                         $(".time").text(time);
                         $(".date").text(date);
                         $(".visibility").text(visi);
+                        $("#velocity").text(`${wind}km/h`);
+                        $("#pressure").text(`${press}hPa`);
 
                         let visiStat = '보통';
 
@@ -419,6 +475,10 @@
                         const nowPop = data.list[0].pop
                         $("#prep").text(`강수확률 ${nowPop}%`);
 
+                        moment.locale('ko'); // 무슨요일?
+                        const dayNameKor = moment().format('dddd');
+                        $(".day").text(dayNameKor);
+
                         // HTML 구조에 따라 반복적으로 데이터 채우기
                         $(".contents-cont .array-cont").each(function (index) {
                             if (index < forecastList.length) { // 예보 데이터의 길이만큼만 처리
@@ -439,7 +499,66 @@
                             }
                         });
 
+                        const forecasts = processForecastData(data);
+                        renderWeeklyForecast(forecasts);
                     });
+
+                    // 1. 5일간의 일별 최고/최저 기온 및 아이콘 계산
+                    function processForecastData(data) {
+                        const dailyData = {};
+
+                        // 데이터 그룹화 (날짜별로)
+                        data.list.forEach(item => {
+                            const date = item.dt_txt.split(" ")[0]; // 날짜만 추출
+                            if (!dailyData[date]) dailyData[date] = [];
+
+                            dailyData[date].push({
+                                temp: item.main.temp,
+                                icon: item.weather[0].icon // 아이콘 코드 저장
+                            });
+                        });
+
+                        // 날짜별로 최고/최저 기온 및 아이콘 계산
+                        const dailyTemps = Object.keys(dailyData).map(date => {
+                            const dayData = dailyData[date];
+                            const temps = dayData.map(d => d.temp);
+
+                            return {
+                                date,
+                                maxTemp: Math.max(...temps),
+                                minTemp: Math.min(...temps),
+                                icon: dayData[0].icon // 해당 날짜 첫 번째 아이콘 사용
+                            };
+                        });
+
+                        // 최대 5일치 데이터 반환
+                        return dailyTemps.slice(0, 5);
+                    }
+
+                    // 2. HTML 렌더링 함수
+                    function renderWeeklyForecast(forecasts) {
+                        const container = $("#weekly-forecast");
+                        container.empty(); // 기존 내용 초기화
+
+                        forecasts.forEach(day => {
+                            const weekName = moment(day.date).format("dddd"); // 요일명 계산
+                            const iconPath = `icon/weather/${getCustomIconPath(day.icon).split('/').pop()}` // 사용자 정의 아이콘 경로 생성
+                            const weatherStatus = getWeatherStatus(day.icon); // 날씨 상태 생성
+
+                            const html = `
+                                            <div class="day-item">
+                                                <img class="weekly-ico-weather" src="${iconPath}" alt="${weatherStatus}">
+                                                <p class="weekname">${weekName}</p>
+                                                <div class="fore-temperature">
+                                                    <p class="hot">${day.maxTemp.toFixed(1)}°C</p>
+                                                    <p>/</p>
+                                                    <p class="cold">${day.minTemp.toFixed(1)}°C</p>
+                                                </div>
+                                            </div>
+                                        `;
+                            container.append(html); // 컨테이너에 추가
+                        });
+                    }
 
                     //오염도 접근
                     $.getJSON(urlPollution, function (data) {

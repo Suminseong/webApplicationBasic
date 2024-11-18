@@ -100,11 +100,16 @@ header {
     justify-content: space-around; /* 네비게이션 아이템 간격 균등 */
     border-bottom: 1px solid #ddd; /* 하단 선 */
     z-index: 100;
+    background-color: #fff;
 }
 
 .nav {
     text-align: center;
     justify-content: space-around; 
+}
+
+.array-time {
+    font-size: 14px;
 }
 
 .nav p {
@@ -127,13 +132,11 @@ header {
 }
 
 .container2 {
-    width: 100%;
     padding: 0px 24px;
     scrollbar-width: none;
 }
 
 .container3 {
-    width: 100%;
     padding: 0px 24px;
     scrollbar-width: none;
 }
@@ -251,4 +254,63 @@ header {
     width: 100%;
     display: flex;
     justify-content: space-between;
+}
+
+.view-value .p-16px {
+    font-weight: bold;
+}
+
+.weekly-daycont {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.weekly-ico-weather {
+    width: 30px;
+    height: 30px;
+    margin: 0;
+}
+
+.day-item {
+    width: 100%;
+    margin-top: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.fore-temperature {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 110px;
+    gap: 12px;
+}
+
+.weekname {
+    font-size: 20px;
+
+}
+
+.hot {
+    color: red;
+}
+
+.cold {
+    color: blue;
+}
+
+.wind-value {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.wind-value .p-16px {
+    font-weight: bold;
 }
