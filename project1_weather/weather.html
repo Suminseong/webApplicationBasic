@@ -10,6 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment-with-locales.min.js"
         integrity="sha512-4F1cxYdMiAW98oomSLaygEwmCnIP38pb4Kx70yQYqRwLVCs3DbRumfBq82T08g/4LJ/smbFGFpmeFlQgoDccgg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
     <link rel="stylesheet" href="style.css" />
     <title>날씨</title>
 </head>
@@ -33,17 +34,13 @@
         </div>
     </header>
 
+    <!--로띠로띠로띠로띠로띠로띠로띠로띠로띠로띠로띠로띠-->
     <div id="content">
-        <!-- 로티 애니메이션 영역 -->
         <div id="weather-lottie"></div>
+    </div>
 
-        <!-- 날씨 정보 영역 -->
-        <div id="weather-info">
-            <div class="skeleton" id="temp-skeleton"></div>
-            <div class="skeleton" id="description-skeleton"></div>
-            <p id="temperature" style="display:none;"></p>
-            <p id="description" style="display:none;"></p>
-        </div>
+    <div id="weather-info">
+
     </div>
 
     <script>
@@ -135,6 +132,16 @@
 
         // 페이지 로드 후 코드
         $(document).ready(function () {
+            // Lottie 애니메이션 초기화
+            const animation = lottie.loadAnimation({
+                container: $('#weather-lottie')[0], // jQuery로 요소 선택
+                renderer: 'svg', // 렌더링 방식: 'svg', 'canvas', 'html'
+                loop: true,      // 반복 여부
+                autoplay: true,  // 자동 재생 여부
+                path: 'anim/lottie-sunny.json' // JSON 파일 경로
+            });
+
+            animation.play();
             // 위치 정보를 가져온 뒤 데이터 요청
             getGPSCoordinates(function (result) {
                 if (result.error) {
@@ -145,7 +152,7 @@
                 }
             });
 
-            $('#gps').on('click', function () {
+            $('.header_center').on('click', function () {
                 // 클릭 시 로딩 중 메시지 표시 (옵션)
                 $('#bigCity').text('Loading...');
 
@@ -159,7 +166,6 @@
                 });
             });
         });
-
 
     </script>
 </body>
