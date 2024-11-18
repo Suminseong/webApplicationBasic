@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background-color: black;
+}
+
+body {
+    background: linear-gradient(to bottom, #484b5b, #2c2d35);
+    background-color: #fff;
+    width: 375px;
+    height: 800px;
+}
+
+.status {
+    background-image: url('image/statusbar.png');
+    height: 44px;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+header {
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#ico-menu {
+    max-width: 24px;
+}
+
+#ico-setting {
+    max-width: 24px;
+}
+
+#ico-gps {
+    max-width: 16px;
+}
+
+#cityName {
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+}
+
+.header_center {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
