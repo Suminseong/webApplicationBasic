@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <title>날씨 API</title>
+</head>
+
+<body>
+    <img id="icon" />
+    <p id="city"></p>
+    <h1 id="weather"></h1>
+    <h2 id="temp"></h2>
+    <p id="temp_minmax"></p>
+</body>
+<script>
+    $(function () {
+        let url = 'https://api.openweathermap.org/data/2.5/weather?lat=37.3799&lon=126.8032&appid=25b7bd10b57e76dec116bf982ffca3dd&units=metric'
+
+        $.getJSON(url, function (data) {
+            console.log(data)
+            let city = data.name
+            let weather = data.weather[0].main
+            let temp = data.main.temp
+            let tempMax = data.main.temp_max
+            let tempMin = data.main.temp_min
+
+            $('#weather').text(weather)
+            $('#temp').text(temp + '도')
+            $('#temp_minmax').text(tempMax + '도' + '/' + tempMin + '도')
+            $('#city').text(city)
+
+            let icon = data.weather[0].icon
+            let iconURL = 'https://openweathermap.org/img/wn/' + icon + '@2x.png'
+            $('#icon').attr('src', iconURL)
+        })
+
+
+    })
+</script>
+
+</html>

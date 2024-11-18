@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment-with-locales.min.js"
+        integrity="sha512-4F1cxYdMiAW98oomSLaygEwmCnIP38pb4Kx70yQYqRwLVCs3DbRumfBq82T08g/4LJ/smbFGFpmeFlQgoDccgg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>날씨 API</title>
+</head>
+
+<body>
+    <img id="icon" />
+    <p id="city"></p>
+    <h1 id="weather"></h1>
+    <h2 id="temp"></h2>
+    <p id="temp_minmax"></p>
+
+    <div id="forecast"></div>
+</body>
+<script>
+    $(function () {
+        let url = 'https://api.openweathermap.org/data/2.5/weather?lat=37.3799&lon=126.8032&appid=25b7bd10b57e76dec116bf982ffca3dd&units=metric'
+        let urlForecast = 'https://api.openweathermap.org/data/2.5/forecast?lat=37.3799&lon=126.8032&appid=25b7bd10b57e76dec116bf982ffca3dd&units=metric'
+
+        $.getJSON(url, function (data) {
+            console.log(data)
+            let city = data.name
+            let weather = data.weather[0].main
+            let temp = data.main.temp
+            let tempMax = data.main.temp_max
+            let tempMin = data.main.temp_min
+
+            $('#weather').text(weather)
+            $('#temp').text(temp + '도')
+            $('#temp_minmax').text(tempMax + '도' + '/' + tempMin + '도')
+            $('#city').text(city)
+
+            let icon = data.weather[0].icon
+            let iconURL = 'https://openweathermap.org/img/wn/' + icon + '@2x.png'
+            $('#icon').attr('src', iconURL)
+        })
+
+        $.getJSON(urlForecast, function (data) {
+
+            for (let i = 0; i < 20; i ++) {
+                let weather = data.list[i].weather[0].main
+                let temp = data.list[i].main.temp
+                let dt = data.list[i].dt
+
+                let time = moment(dt * 1000).format('HH:mm')
+
+                let dom = $('<div></div>')
+                dom.append('<h3>' + time + '</h3>')
+                dom.append('<p>' + weather + '</p>')
+                dom.append('<p>' + temp + '</p>')
+
+                $('#forecast').append(dom)
+            }
+        })
+
+
+    })
+</script>
+
+</html>
