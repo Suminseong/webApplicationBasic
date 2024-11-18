@@ -36,7 +36,7 @@ header {
     max-width: 24px;
 }
 
-#ico-gps {
+.ico-gps {
     max-width: 16px;
 }
 
@@ -62,4 +62,70 @@ header {
 #weather-lottie {
     width: 250px;
     height: 250px;
+}
+
+#weather-info {
+    background-color: #fff;
+    width: 375px;
+    position: absolute;
+    bottom: -100px;
+    padding: 64px 0px;
+}
+
+/* 기본 네비게이션 스타일 */
+.navbar {
+    display: flex;
+    justify-content: space-around; /* 네비게이션 아이템 간격 균등 */
+    border-bottom: 1px solid #ddd; /* 하단 선 */
+}
+
+.nav {
+    text-align: center;
+    justify-content: space-around; 
+}
+
+.nav p {
+    margin: 0;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #888; 
+    cursor: pointer;
+}
+
+.nav-select {
+    font-weight: bold; 
+    color: #000; 
+    border-bottom: 2px solid #000; 
+}
+
+.container {
+    padding: 0px 24px;
+}
+
+.info-card-main {
+    background: linear-gradient(to right, #3D70D2, #7CA9FF);
+    padding: 26px 22px;
+    margin-top: 45px;
+    border-radius: 16px;
+    color: #fff;
+}
+
+.p-14px {
+    font-size: 14px;
+}
+
+.p-34px {
+    font-size: 34px;
+}
+
+.now-weather {
+    display: flex;
+    justify-content: space-between;
+}
+
+.gps-city {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    margin-top: 30px;
 }

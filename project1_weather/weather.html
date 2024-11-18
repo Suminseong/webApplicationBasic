@@ -26,7 +26,7 @@
                 <p id="bigCity">Incheon</p>
             </div>
             <div id="gps">
-                <img id="ico-gps" src="icon/gps-icon.png" alt="GPS Icon">
+                <img class="ico-gps" src="icon/gps-icon.png" alt="GPS Icon">
             </div>
         </div>
         <div id="settingSide">
@@ -39,133 +39,236 @@
         <div id="weather-lottie"></div>
     </div>
 
+    <!--하단바-->
     <div id="weather-info">
-
+        <div class="navbar">
+            <div class="nav">
+                <p class="nav-select" id="today">오늘예보</p>
+            </div>
+            <div class="nav">
+                <p id="weekly">주간예보</p>
+            </div>
+            <div class="nav">
+                <p id="rainCast">강수예측</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="info-card-main"><!--밑에서 처음부터 보이는 친구-->
+                <div class="home-visible">
+                    <div class="now-weather">
+                        <div class="main-text-area">
+                            <p class="p-14px" id="prep"></p>
+                            <p class="p-34px" id="curr"></p>
+                        </div>
+                        <img class="currentIcon" src="icon/default.png" alt="weather">
+                    </div>
+                    <div class="gps-city">
+                        <div class="gps">
+                            <img class="ico-gps" src="icon/gps-icon.png" alt="GPS Icon">
+                        </div>
+                        <div id="cityName">
+                            <p id="cityName">Incheon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="info-card-sub"></div>
+        </div>
     </div>
 
+
+
     <script>
-        let lat = 36.8; // 초기 좌표
-        let lng = 128.0; // 초기 좌표
-
-        function getGPSCoordinates(callback) {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    function (position) {
-                        lat = position.coords.latitude;
-                        lng = position.coords.longitude;
-                        callback({ lat: lat, lng: lng });
-                    },
-                    function (error) {
-                        let errorMsg = '';
-                        switch (error.code) {
-                            case error.PERMISSION_DENIED:
-                                errorMsg = "권한 요청이 거부되어 위치 정보를 불러올 수 없어요.";
-                                break;
-                            case error.POSITION_UNAVAILABLE:
-                                errorMsg = "위치정보가 사용 불가능해요. 일시적 오류일 수 있어요.";
-                                break;
-                            case error.TIMEOUT:
-                                errorMsg = "위치정보를 가져오는데 너무 오랜 시간이 걸립니다.";
-                                break;
-                            default:
-                                errorMsg = "알 수 없는 에러 발생!";
-                        }
-                        callback({ error: errorMsg });
-                    }
-                );
-            } else {
-                callback({ error: "이 브라우저는 현위치 및 위치정보를 지원하지 않아요." });
-            }
-        }
-
-        // 데이터 가져오기 및 UI 업데이트 함수
-        function fetchWeatherData(lat, lng) {
-            // API URL 생성
-            const apiKey = "25b7bd10b57e76dec116bf982ffca3dd";
-            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apiKey}&units=metric&lang=kr`;
-            const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${apiKey}&lang=kr&units=metric`;
-
-            // 현재 날씨 데이터 요청
-            $.getJSON(url, function (data) {
-                console.log(data);
-                let city = data.name;
-                let weather = data.weather[0].main;
-                let temp = data.main.temp;
-                let tempMax = data.main.temp_max;
-                let tempMin = data.main.temp_min;
-
-                let icon = data.weather[0].icon;
-                let iconURL = 'https://openweathermap.org/img/wn/' + icon + '@2x.png';
-
-                // UI 업데이트
-                $('#bigCity').text(city);
-                $('#weather').text(weather);
-                $('#temp').text(`${temp}°C`);
-                $('#tempMax').text(`최고: ${tempMax}°C`);
-                $('#tempMin').text(`최저: ${tempMin}°C`);
-                $('#icon').attr('src', iconURL);
-            });
-
-            // 5일 예보 데이터 요청
-            $.getJSON(urlForecast, function (data) {
-                console.log(data);
-                let forecastHTML = '';
-                for (let i = 0; i < 20; i++) {
-                    let weather = data.list[i].weather[0].main;
-                    let temp = data.list[i].main.temp;
-                    let dt = data.list[i].dt;
-
-                    let time = moment(dt * 1000).format('HH:mm');
-
-                    // 예보 정보를 HTML로 구성
-                    forecastHTML += `
-                <div class="forecast-item">
-                    <p>${time}</p>
-                    <p>${weather}</p>
-                    <p>${temp}°C</p>
-                </div>`;
-                }
-                // 예보 정보 UI 업데이트
-                $('#forecast').html(forecastHTML);
-            });
-        }
-
-        // 페이지 로드 후 코드
         $(document).ready(function () {
-            // Lottie 애니메이션 초기화
-            const animation = lottie.loadAnimation({
-                container: $('#weather-lottie')[0], // jQuery로 요소 선택
-                renderer: 'svg', // 렌더링 방식: 'svg', 'canvas', 'html'
-                loop: true,      // 반복 여부
-                autoplay: true,  // 자동 재생 여부
-                path: 'anim/lottie-sunny.json' // JSON 파일 경로
-            });
+            let currentAnimation = null; // 현재 Lottie 애니메이션 객체를 저장하는 변수
 
-            animation.play();
-            // 위치 정보를 가져온 뒤 데이터 요청
+            const iconCodeMapping = { //날씨 아이콘 매핑
+                '01': 'clear_sky',
+                '02': 'few_clouds',
+                '03': 'scattered_clouds',
+                '04': 'broken_clouds',
+                '09': 'shower_rain',
+                '10': 'rain',
+                '11': 'thunderstorm',
+                '13': 'snow',
+                '50': 'mist'
+            };
+
+            const weatherStatusMapping = { //한국어로도
+                '01': '맑음',
+                '02': '구름 조금',
+                '03': '구름 많음',
+                '04': '흐림',
+                '09': '소나기',
+                '10': '비',
+                '11': '뇌우',
+                '13': '눈',
+                '50': '안개'
+            };
+
+            // 커스텀 아이콘 경로 반환 함수
+            function getCustomIconPath(iconCode) {
+                const iconNumber = iconCode.slice(0, 2); // 두 자리 숫자 코드 추출
+                const timeOfDay = iconCode.slice(2);    // d, n 추출
+                const weatherCondition = iconCodeMapping[iconNumber];
+
+                if (weatherCondition) {
+                    return `icon/${weatherCondition}_${timeOfDay}.png`;
+                } else {
+                    return `icon/default.png`;
+                }
+            }
+
+            // 매핑 객체: OpenWeatherMap의 icon 코드 → Lottie 애니메이션 JSON 파일명
+            const lottieMapping = {
+                '01d': 'lottie-sunny.json',
+                '01n': 'lottie-clear-night.json',
+                '02d': 'lottie-cloudy.json',
+                '02n': 'lottie-cloudy-night.json',
+                '09d': 'lottie-rain-showers.json',
+                '09n': 'lottie-rain-showers-night.json',
+                '10d': 'lottie-rain.json',
+                '10n': 'lottie-rain-night.json',
+                '11d': 'lottie-thunderstorm.json',
+                '11n': 'lottie-thunderstorm-night.json',
+                '13d': 'lottie-snow.json',
+                '13n': 'lottie-snow-night.json',
+                '50d': 'lottie-mist.json',
+                '50n': 'lottie-mist-night.json'
+            };
+
+            // Lottie 애니메이션 JSON 경로 반환 함수
+            function getLottieAnimationPath(iconCode) {
+                return `anim/${lottieMapping[iconCode] || 'default.json'}`;
+            }
+
+            function updateWeatherIcon(iconCode) {
+                // 아이콘 경로를 얻기 위한 함수
+                const iconPath = getCustomIconPath(iconCode);
+                $(".currentIcon").attr("src", iconPath);
+            }
+
+            function getWeatherStatus(iconCode) {
+                const iconNumber = iconCode.slice(0, 2); // 아이콘 코드의 첫 두 자리 추출
+                return weatherStatusMapping[iconNumber] || '알 수 없음'; // 매핑된 상태 반환. 아마 한국어 문자형으로 나올것
+            }
+
+            // Lottie 애니메이션 업데이트 함수
+            function updateLottieAnimation(iconCode) {
+                const lottiePath = getLottieAnimationPath(iconCode);
+
+                // 기존 애니메이션 중단 및 제거
+                if (currentAnimation) {
+                    currentAnimation.destroy();
+                }
+
+                // 새로운 Lottie 애니메이션 초기화
+                currentAnimation = lottie.loadAnimation({
+                    container: $('#weather-lottie')[0],
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    path: lottiePath
+                });
+
+                currentAnimation.play();
+            }
+
+            // 날씨 데이터 가져오기 및 UI 업데이트
+            function fetchWeatherData(lat, lng) {
+                const apiKey = "25b7bd10b57e76dec116bf982ffca3dd";
+                const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apiKey}&units=metric&lang=kr`;
+                const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=25b7bd10b57e76dec116bf982ffca3dd&units=metric&lang=kr`
+
+                // OpenWeatherMap API 호출
+                $.getJSON(url, function (data) {
+                    console.log(data);
+                    const city = data.name;
+                    const weather = data.weather[0].main;
+                    const temp = data.main.temp;
+                    const iconCode = data.weather[0].icon;
+                    const weatherStatus = getWeatherStatus(iconCode);
+
+                    // Lottie 애니메이션 업데이트
+                    updateLottieAnimation(iconCode);
+
+                    updateWeatherIcon(iconCode);
+
+                    // UI 업데이트
+                    $("#curr").text(weatherStatus);
+
+                    $("#bigCity").text(`${city}`);
+                });
+
+                $.getJSON(urlForecast, function (data) {
+                    let nowPop = data.list[0].pop
+
+                    $("#prep").text(`강수확률 ${nowPop}%`);
+                })
+            }
+
+            // GPS 좌표 가져오기
+            function getGPSCoordinates(callback) {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        function (position) {
+                            const lat = position.coords.latitude;
+                            const lng = position.coords.longitude;
+                            callback({ lat, lng });
+                        },
+                        function (error) { //오류 예외처리
+                            let errorMsg = '';
+                            switch (error.code) {
+                                case error.PERMISSION_DENIED:
+                                    errorMsg = "위치 권한이 거부되었습니다.";
+                                    break;
+                                case error.POSITION_UNAVAILABLE:
+                                    errorMsg = "위치 정보를 사용할 수 없습니다.";
+                                    break;
+                                case error.TIMEOUT:
+                                    errorMsg = "위치 정보를 가져오는데 시간이 초과되었습니다.";
+                                    break;
+                                default:
+                                    errorMsg = "알 수 없는 오류가 발생했습니다.";
+                            }
+                            callback({ error: errorMsg });
+                        }
+                    );
+                } else {
+                    callback({ error: "브라우저에서 위치 정보를 지원하지 않습니다." });
+                }
+            }
+
+            // 페이지 로드 후 초기화
             getGPSCoordinates(function (result) {
                 if (result.error) {
-                    alert(result.error); // 에러 메시지 표시
+                    alert(result.error);
                 } else {
-                    // 날씨 데이터 가져오기
                     fetchWeatherData(result.lat, result.lng);
                 }
             });
 
-            $('.header_center').on('click', function () {
-                // 클릭 시 로딩 중 메시지 표시 (옵션)
-                $('#bigCity').text('Loading...');
+            $(".nav p").on("click", function () {
+                // 모든 아이템에서 'nav-select' 클래스 제거
+                $(".nav p").removeClass("nav-select");
 
-                // 좌표 다시 읽기 및 데이터 요청
+                // 클릭한 아이템에 'nav-select' 클래스 추가
+                $(this).addClass("nav-select");
+            });
+
+            // 도시명을 클릭하여 새로고침
+            $('.header_center').on('click', function () {
+                $('#bigCity').text('Loading...');
                 getGPSCoordinates(function (result) {
                     if (result.error) {
-                        alert(result.error); // 에러 메시지 표시
+                        alert(result.error);
                     } else {
                         fetchWeatherData(result.lat, result.lng);
                     }
                 });
             });
         });
+
 
     </script>
 </body>
