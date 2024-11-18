@@ -7,11 +7,16 @@ html {
     background-color: black;
 }
 
-body {
+.mobile {
     background: linear-gradient(to bottom, #484b5b, #2c2d35);
     background-color: #fff;
     width: 375px;
     height: 800px;
+    overflow: hidden;
+}
+
+#bigCity {
+    color: #fff;
 }
 
 .status {
@@ -19,6 +24,7 @@ body {
     height: 44px;
     width: 100%;
     margin-bottom: 8px;
+    z-index: 9999;
 }
 
 header {
@@ -26,6 +32,21 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 9999;
+}
+
+.btn-scroll {
+    width: 130px;
+    height: 5px;
+    background-color: #2c2d35;
+    border-radius: 5px;
+}
+
+.forcenter {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
 }
 
 #ico-menu {
@@ -56,7 +77,7 @@ header {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 80px;
+    margin-top: 60px;
 }
 
 #weather-lottie {
@@ -67,9 +88,10 @@ header {
 #weather-info {
     background-color: #fff;
     width: 375px;
-    position: absolute;
-    bottom: -100px;
-    padding: 64px 0px;
+    padding: 32px 0px;
+    transform: translateY(0px);
+    transition: all ease-in-out 0.4s;
+    scrollbar-width: none;
 }
 
 /* 기본 네비게이션 스타일 */
@@ -77,6 +99,7 @@ header {
     display: flex;
     justify-content: space-around; /* 네비게이션 아이템 간격 균등 */
     border-bottom: 1px solid #ddd; /* 하단 선 */
+    z-index: 100;
 }
 
 .nav {
@@ -100,6 +123,19 @@ header {
 
 .container {
     padding: 0px 24px;
+    scrollbar-width: none;
+}
+
+.container2 {
+    width: 100%;
+    padding: 0px 24px;
+    scrollbar-width: none;
+}
+
+.container3 {
+    width: 100%;
+    padding: 0px 24px;
+    scrollbar-width: none;
 }
 
 .info-card-main {
@@ -108,14 +144,23 @@ header {
     margin-top: 45px;
     border-radius: 16px;
     color: #fff;
+    box-shadow: 0.5px 2px 3px 1px #b6b6b6;
 }
 
 .p-14px {
     font-size: 14px;
 }
 
+.p-10px {
+    font-size: 10px;
+}
+
 .p-34px {
     font-size: 34px;
+}
+
+.p-16px {
+    font-size: 16px;
 }
 
 .now-weather {
@@ -127,5 +172,83 @@ header {
     display: flex;
     flex-direction: row;
     gap: 4px;
-    margin-top: 30px;
+    margin-top: 16px;
+}
+
+.current-detail {
+    display: flex;
+    gap: 48px;
+    align-items: baseline;
+}
+
+.gasuv {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+}
+
+.gascont {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.info-card-sub {
+    margin: 8px 0px;
+}
+
+.line1 {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.title {
+    font-size: 20px;
+    color: #363B64;
+    font-weight: bold;
+    margin-top: 36px;
+}
+
+.card {
+    padding: 24px 16px;
+    margin-top: 8px;
+    box-shadow: 0.5px 2px 3px 1px #b6b6b6;
+    border-radius: 20px;
+}
+
+.date {
+    font-weight: bold;
+    color: #363b64;
+}
+.contents-cont {
+    display: flex;
+    gap: 24px;
+    margin-top: 18px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    cursor: grab;
+}
+
+.array-cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contents-cont::-webkit-scrollbar {
+    display: none; /* Chrome, Safari 스크롤바 숨김 */
+}
+
+.view-range {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.view-value {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }

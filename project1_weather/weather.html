@@ -16,249 +16,505 @@
 </head>
 
 <body>
-    <div class="status"></div>
-    <header>
-        <div id="aside">
-            <img id="ico-menu" src="icon/menu-icon.png" alt="Menu Icon">
-        </div>
-        <div class="header_center">
-            <div id="cityName">
-                <p id="bigCity">Incheon</p>
+    <div class="mobile">
+        <div class="status"></div>
+        <header>
+            <div id="aside">
+                <img id="ico-menu" src="icon/menu-icon.png" alt="Menu Icon">
             </div>
-            <div id="gps">
-                <img class="ico-gps" src="icon/gps-icon.png" alt="GPS Icon">
+            <div class="header_center">
+                <div class="cityName">
+                    <p id="bigCity">Incheon</p>
+                </div>
+                <div id="gps">
+                    <img class="ico-gps" src="icon/gps-icon.png" alt="GPS Icon">
+                </div>
             </div>
-        </div>
-        <div id="settingSide">
-            <img id="ico-setting" src="icon/setting-icon.png" alt="Settings Icon">
-        </div>
-    </header>
+            <div id="settingSide">
+                <img id="ico-setting" src="icon/setting-icon.png" alt="Settings Icon">
+            </div>
+        </header>
 
-    <!--로띠로띠로띠로띠로띠로띠로띠로띠로띠로띠로띠로띠-->
-    <div id="content">
-        <div id="weather-lottie"></div>
-    </div>
-
-    <!--하단바-->
-    <div id="weather-info">
-        <div class="navbar">
-            <div class="nav">
-                <p class="nav-select" id="today">오늘예보</p>
-            </div>
-            <div class="nav">
-                <p id="weekly">주간예보</p>
-            </div>
-            <div class="nav">
-                <p id="rainCast">강수예측</p>
-            </div>
+        <!--로띠로띠로띠로띠로띠로띠로띠로띠로띠로띠로띠로띠-->
+        <div id="content">
+            <div id="weather-lottie"></div>
         </div>
-        <div class="container">
-            <div class="info-card-main"><!--밑에서 처음부터 보이는 친구-->
-                <div class="home-visible">
-                    <div class="now-weather">
-                        <div class="main-text-area">
-                            <p class="p-14px" id="prep"></p>
-                            <p class="p-34px" id="curr"></p>
+
+        <!--하단바-->
+        <div id="weather-info">
+            <div class="forcenter"><!--버튼-->
+                <div class="btn-scroll"></div>
+            </div>
+
+            <div class="navbar">
+                <div class="nav">
+                    <p class="nav-select" id="today">오늘예보</p>
+                </div>
+                <div class="nav">
+                    <p id="weekly">주간예보</p>
+                </div>
+                <div class="nav">
+                    <p id="rainCast">강수예측</p>
+                </div>
+            </div>
+            <div class="container" style="z-index: -1000;">
+                <div class="info-card-main"><!--밑에서 처음부터 보이는 친구-->
+                    <div class="home-visible">
+                        <div class="now-weather">
+                            <div class="main-text-area">
+                                <p class="p-14px" id="prep"></p>
+                                <p class="p-34px" id="curr"></p>
+                            </div>
+                            <img class="currentIcon" src="icon/default.png" alt="weather">
                         </div>
-                        <img class="currentIcon" src="icon/default.png" alt="weather">
+                        <div class="gps-city">
+                            <div class="gps">
+                                <img class="ico-gps" src="icon/gps-icon.png" alt="GPS Icon">
+                            </div>
+                            <div class="cityName">
+                                <p class="cityName">Incheon</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="gps-city">
-                        <div class="gps">
-                            <img class="ico-gps" src="icon/gps-icon.png" alt="GPS Icon">
+                    <div class="current-detail">
+                        <p class="p-24px"><span id="temperature" style="font-size: 24px;"></span>°C</p>
+                        <div class="gasuv">
+                            <div class="gascont">
+                                <p class="p-10px">PM10</p>
+                                <p class="p-14px" id="pm10"></p>
+                            </div>
+                            <div class="gascont">
+                                <p class="p-10px">PM2.5</p>
+                                <p class="p-14px" id="pm25"></p>
+                            </div>
+                            <div class="gascont">
+                                <p class="p-10px">습도</p>
+                                <p class="p-14px" id="hum"></p>
+                            </div>
                         </div>
-                        <div id="cityName">
-                            <p id="cityName">Incheon</p>
+                    </div>
+                </div>
+                <div class="info-card-sub">
+                    <p class="title">시간별 예보</p>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="line1">
+                                <p class="p-14px curr"></p>
+                                <p class="p-14px"> | </p>
+                                <p class="p-16px time"></p>
+                            </div>
+                            <div class="line2">
+                                <p class="p-16px date"></p>
+                            </div>
+                        </div>
+                        <div class="contents-cont">
+                            <div class="array-cont">
+                                <p class="array-time"></p>
+                                <img class="ico-weather" src="icon/default.png">
+                                <p class="temperature"></p>
+                            </div>
+                            <div class="array-cont">
+                                <p class="array-time"></p>
+                                <img class="ico-weather" src="icon/default.png">
+                                <p class="temperature"></p>
+                            </div>
+                            <div class="array-cont">
+                                <p class="array-time"></p>
+                                <img class="ico-weather" src="icon/default.png">
+                                <p class="temperature"></p>
+                            </div>
+                            <div class="array-cont">
+                                <p class="array-time"></p>
+                                <img class="ico-weather" src="icon/default.png">
+                                <p class="temperature"></p>
+                            </div>
+                            <div class="array-cont">
+                                <p class="array-time"></p>
+                                <img class="ico-weather" src="icon/default.png">
+                                <p class="temperature"></p>
+                            </div>
+                            <div class="array-cont">
+                                <p class="array-time"></p>
+                                <img class="ico-weather" src="icon/default.png">
+                                <p class="temperature"></p>
+                            </div>
+                            <div class="array-cont">
+                                <p class="array-time"></p>
+                                <img class="ico-weather" src="icon/default.png">
+                                <p class="temperature"></p>
+                            </div>
+                            <div class="array-cont">
+                                <p class="array-time"></p>
+                                <img class="ico-weather" src="icon/default.png">
+                                <p class="temperature"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="info-card-sub">
+                    <p class="title">가시거리</p>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="view-range">
+                                <p class="p-10px">가시거리</p>
+                                <p class="p-10px">시정</p>
+                            </div>
+                            <div class="view-value">
+                                <p class="p-16px visibility"></p>
+                                <p class="p-16px visiStat"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="info-card-sub"></div>
+            <div class="container2" style="display: none;">
+                <div class="info-card-sub">
+                    <p class="title">주간 예보</p>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="line1">
+                                <p class="p-14px">이번주 날씨</p>
+                            </div>
+                            <div class="line2">
+                                <p class="p-16px date"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container3" style="display: none;">
+                <p>여기는 강수 예측입니다!</p>
+            </div>
         </div>
-    </div>
 
+        <script>
+            $(document).ready(function () {
 
+                let startY;
+                let currentTranslateY = 90; // 초기 위치 값
+                let isDrag = false;
+                let isToggled = false; // 토글 상태
 
-    <script>
-        $(document).ready(function () {
-            let currentAnimation = null; // 현재 Lottie 애니메이션 객체를 저장하는 변수
-
-            const iconCodeMapping = { //날씨 아이콘 매핑
-                '01': 'clear_sky',
-                '02': 'few_clouds',
-                '03': 'scattered_clouds',
-                '04': 'broken_clouds',
-                '09': 'shower_rain',
-                '10': 'rain',
-                '11': 'thunderstorm',
-                '13': 'snow',
-                '50': 'mist'
-            };
-
-            const weatherStatusMapping = { //한국어로도
-                '01': '맑음',
-                '02': '구름 조금',
-                '03': '구름 많음',
-                '04': '흐림',
-                '09': '소나기',
-                '10': '비',
-                '11': '뇌우',
-                '13': '눈',
-                '50': '안개'
-            };
-
-            // 커스텀 아이콘 경로 반환 함수
-            function getCustomIconPath(iconCode) {
-                const iconNumber = iconCode.slice(0, 2); // 두 자리 숫자 코드 추출
-                const timeOfDay = iconCode.slice(2);    // d, n 추출
-                const weatherCondition = iconCodeMapping[iconNumber];
-
-                if (weatherCondition) {
-                    return `icon/${weatherCondition}_${timeOfDay}.png`;
-                } else {
-                    return `icon/default.png`;
-                }
-            }
-
-            // 매핑 객체: OpenWeatherMap의 icon 코드 → Lottie 애니메이션 JSON 파일명
-            const lottieMapping = {
-                '01d': 'lottie-sunny.json',
-                '01n': 'lottie-clear-night.json',
-                '02d': 'lottie-cloudy.json',
-                '02n': 'lottie-cloudy-night.json',
-                '09d': 'lottie-rain-showers.json',
-                '09n': 'lottie-rain-showers-night.json',
-                '10d': 'lottie-rain.json',
-                '10n': 'lottie-rain-night.json',
-                '11d': 'lottie-thunderstorm.json',
-                '11n': 'lottie-thunderstorm-night.json',
-                '13d': 'lottie-snow.json',
-                '13n': 'lottie-snow-night.json',
-                '50d': 'lottie-mist.json',
-                '50n': 'lottie-mist-night.json'
-            };
-
-            // Lottie 애니메이션 JSON 경로 반환 함수
-            function getLottieAnimationPath(iconCode) {
-                return `anim/${lottieMapping[iconCode] || 'default.json'}`;
-            }
-
-            function updateWeatherIcon(iconCode) {
-                // 아이콘 경로를 얻기 위한 함수
-                const iconPath = getCustomIconPath(iconCode);
-                $(".currentIcon").attr("src", iconPath);
-            }
-
-            function getWeatherStatus(iconCode) {
-                const iconNumber = iconCode.slice(0, 2); // 아이콘 코드의 첫 두 자리 추출
-                return weatherStatusMapping[iconNumber] || '알 수 없음'; // 매핑된 상태 반환. 아마 한국어 문자형으로 나올것
-            }
-
-            // Lottie 애니메이션 업데이트 함수
-            function updateLottieAnimation(iconCode) {
-                const lottiePath = getLottieAnimationPath(iconCode);
-
-                // 기존 애니메이션 중단 및 제거
-                if (currentAnimation) {
-                    currentAnimation.destroy();
-                }
-
-                // 새로운 Lottie 애니메이션 초기화
-                currentAnimation = lottie.loadAnimation({
-                    container: $('#weather-lottie')[0],
-                    renderer: 'svg',
-                    loop: true,
-                    autoplay: true,
-                    path: lottiePath
+                // 버튼을 눌러 weather-info를 토글
+                $('.btn-scroll').on('click', function () {
+                    if (isToggled) {
+                        $('#weather-info').css('transform', 'translateY(90px)');
+                        $('#weather-info').css('overflow', 'hidden'); // 스크롤 비활성화
+                    } else {
+                        $('#weather-info').css('transform', 'translateY(-360px)');
+                        $('#weather-info').css('overflow', 'auto'); // 스크롤 활성화
+                    }
+                    isToggled = !isToggled;
                 });
 
-                currentAnimation.play();
-            }
-
-            // 날씨 데이터 가져오기 및 UI 업데이트
-            function fetchWeatherData(lat, lng) {
-                const apiKey = "25b7bd10b57e76dec116bf982ffca3dd";
-                const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apiKey}&units=metric&lang=kr`;
-                const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=25b7bd10b57e76dec116bf982ffca3dd&units=metric&lang=kr`
-
-                // OpenWeatherMap API 호출
-                $.getJSON(url, function (data) {
-                    console.log(data);
-                    const city = data.name;
-                    const weather = data.weather[0].main;
-                    const temp = data.main.temp;
-                    const iconCode = data.weather[0].icon;
-                    const weatherStatus = getWeatherStatus(iconCode);
-
-                    // Lottie 애니메이션 업데이트
-                    updateLottieAnimation(iconCode);
-
-                    updateWeatherIcon(iconCode);
-
-                    // UI 업데이트
-                    $("#curr").text(weatherStatus);
-
-                    $("#bigCity").text(`${city}`);
+                // 드래그 시작
+                $('.container').on('mousedown touchstart', function (e) {
+                    if (!isToggled) return; // 토글이 활성화된 경우에만 드래그 허용
+                    isDrag = true;
+                    startY = e.pageY || e.originalEvent.touches[0].pageY;
                 });
 
-                $.getJSON(urlForecast, function (data) {
-                    let nowPop = data.list[0].pop
+                // 드래그 중
+                $('.container').on('mousemove touchmove', function (e) {
+                    if (!isDrag) return;
+                    let currentY = e.pageY || e.originalEvent.touches[0].pageY;
+                    let diffY = currentY - startY;
+                    let newTranslateY = currentTranslateY + diffY;
 
-                    $("#prep").text(`강수확률 ${nowPop}%`);
-                })
-            }
+                    // translateY 값 제한 (예: 90px ~ -300px 사이로 제한)
+                    newTranslateY = Math.max(-300, Math.min(90, newTranslateY));
 
-            // GPS 좌표 가져오기
-            function getGPSCoordinates(callback) {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(
-                        function (position) {
-                            const lat = position.coords.latitude;
-                            const lng = position.coords.longitude;
-                            callback({ lat, lng });
-                        },
-                        function (error) { //오류 예외처리
-                            let errorMsg = '';
-                            switch (error.code) {
-                                case error.PERMISSION_DENIED:
-                                    errorMsg = "위치 권한이 거부되었습니다.";
-                                    break;
-                                case error.POSITION_UNAVAILABLE:
-                                    errorMsg = "위치 정보를 사용할 수 없습니다.";
-                                    break;
-                                case error.TIMEOUT:
-                                    errorMsg = "위치 정보를 가져오는데 시간이 초과되었습니다.";
-                                    break;
-                                default:
-                                    errorMsg = "알 수 없는 오류가 발생했습니다.";
-                            }
-                            callback({ error: errorMsg });
+                    $(this).css('transform', `translateY(${newTranslateY}px)`);
+                });
+
+                // 드래그 종료
+                $('.container').on('mouseup touchend', function () {
+                    if (!isDrag) return;
+                    isDrag = false;
+                    currentTranslateY = parseFloat($(this).css('transform').split(',')[5]) || 90;
+                });
+
+                // 주간 예보 탭 클릭 시 container 전환
+                $('#weekly').on('click', function () {
+                    $('.container').hide();
+                    $('.container2').show();
+                    $('.container3').hide();
+                });
+
+                // 오늘 예보 탭 클릭 시 container 전환
+                $('#today').on('click', function () {
+                    $('.container2').hide();
+                    $('.container3').hide();
+                    $('.container').show();
+                });
+
+                // 강수 예측 탭 클릭 시 container 전환
+                $('#rainCast').on('click', function () {
+                    $('.container').hide();
+                    $('.container2').hide();
+                    $('.container3').show();
+                });
+
+                let currentAnimation = null; // 현재 Lottie 애니메이션 객체를 저장하는 변수
+
+                const iconCodeMapping = { //날씨 아이콘 매핑
+                    '01': 'clear_sky',
+                    '02': 'few_clouds',
+                    '03': 'scattered_clouds',
+                    '04': 'scattered_clouds',
+                    '09': 'shower_rain',
+                    '10': 'rain',
+                    '11': 'thunderstorm',
+                    '13': 'snow',
+                    '50': 'mist'
+                };
+
+                const weatherStatusMapping = { //한국어로도
+                    '01': '맑음',
+                    '02': '구름 조금',
+                    '03': '구름 많음',
+                    '04': '흐림',
+                    '09': '소나기',
+                    '10': '비',
+                    '11': '뇌우',
+                    '13': '눈',
+                    '50': '안개'
+                };
+
+                // 커스텀 아이콘 경로 반환 함수
+                function getCustomIconPath(iconCode) {
+                    const iconNumber = iconCode.slice(0, 2); // 두 자리 숫자 코드 추출
+                    const timeOfDay = iconCode.slice(2);    // d, n 추출
+                    const weatherCondition = iconCodeMapping[iconNumber];
+
+                    if (weatherCondition) {
+                        return `icon/${weatherCondition}_${timeOfDay}.png`;
+                    } else {
+                        return `icon/default.png`;
+                    }
+                }
+
+                // 매핑 객체: OpenWeatherMap의 icon 코드 → Lottie 애니메이션 JSON 파일명
+                const lottieMapping = {
+                    '01d': 'lottie-clear.json',
+                    '01n': 'lottie-clear-night.json',
+                    '02d': 'lottie-cloudy.json',
+                    '02n': 'lottie-cloudy-night.json',
+                    '04d': 'lottie-cloudy.json',
+                    '04n': 'lottie-cloudy-night.json',
+                    '09d': 'lottie-rain-showers.json',
+                    '09n': 'lottie-rain-showers.json',
+                    '10d': 'lottie-rain.json',
+                    '10n': 'lottie-rain.json',
+                    '11d': 'lottie-thunderstorm.json',
+                    '11n': 'lottie-thunderstorm.json',
+                    '13d': 'lottie-snow.json',
+                    '13n': 'lottie-snow.json',
+                    '50d': 'lottie-mist.json',
+                    '50n': 'lottie-mist.json'
+                };
+
+                // Lottie 애니메이션 JSON 경로 반환 함수
+                function getLottieAnimationPath(iconCode) {
+                    return `anim/${lottieMapping[iconCode] || 'default.json'}`;
+                }
+
+                function updateWeatherIcon(iconCode) {
+                    // 아이콘 경로를 얻기 위한 함수
+                    const iconPath = getCustomIconPath(iconCode);
+                    $(".currentIcon").attr("src", iconPath);
+                }
+
+                function getWeatherStatus(iconCode) {
+                    const iconNumber = iconCode.slice(0, 2); // 아이콘 코드의 첫 두 자리 추출
+                    return weatherStatusMapping[iconNumber] || '알 수 없음'; // 매핑된 상태 반환. 아마 한국어 문자형으로 나올것
+                }
+
+                // Lottie 애니메이션 업데이트 함수
+                function updateLottieAnimation(iconCode) {
+                    const lottiePath = getLottieAnimationPath(iconCode);
+
+                    // 기존 애니메이션 중단 및 제거
+                    if (currentAnimation) {
+                        currentAnimation.destroy();
+                    }
+
+                    // 새로운 Lottie 애니메이션 초기화
+                    currentAnimation = lottie.loadAnimation({
+                        container: $('#weather-lottie')[0],
+                        renderer: 'svg',
+                        loop: true,
+                        autoplay: true,
+                        path: lottiePath
+                    });
+
+                    currentAnimation.play();
+                }
+
+                // 날씨 데이터 가져오기 및 UI 업데이트
+                function fetchWeatherData(lat, lng) {
+                    const apiKey = "25b7bd10b57e76dec116bf982ffca3dd";
+                    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apiKey}&units=metric&lang=kr`;
+                    const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=25b7bd10b57e76dec116bf982ffca3dd&units=metric&lang=kr`
+                    const urlPollution = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lng}&appid=${apiKey}`;
+                    // current weather 호출
+                    $.getJSON(url, function (data) {
+                        console.log(data);
+                        const city = data.name;
+                        const visi = data.visibility;
+                        const humidity = data.main.humidity;
+                        const weather = data.weather[0].main;
+                        const temp = data.main.temp;
+                        const iconCode = data.weather[0].icon;
+                        const weatherStatus = getWeatherStatus(iconCode);
+                        let dt = data.dt
+
+                        const date = moment(dt * 1000).format('YYYY년 MM월 DD일');
+                        const time = moment(dt * 1000).format('hh:mm A')
+
+                        // lottie 애니메이션 업데이트
+                        updateLottieAnimation(iconCode);
+
+                        updateWeatherIcon(iconCode);
+
+                        // UI 업데이트
+                        $("#curr").text(weatherStatus);
+                        $("#temperature").text(`${temp.toFixed(1)}`);
+                        $(".cityName #bigCity").text(`${city}`);
+                        $("#hum").text(humidity);
+                        $(".curr").text(weatherStatus);
+                        $(".time").text(time);
+                        $(".date").text(date);
+                        $(".visibility").text(visi);
+
+                        let visiStat = '보통';
+
+                        if (visi > 5000) {
+                            visiStat = '매우좋음'
                         }
-                    );
-                } else {
-                    callback({ error: "브라우저에서 위치 정보를 지원하지 않습니다." });
+                        else if (visi > 2000 && visi < 4999) {
+                            visiStat == '좋음'
+                        }
+                        else if (visi > 2000 && visi < 4999) {
+                            visiStat == '좋음'
+                        }
+                        else if (visi > 1000 && visi < 1999) {
+                            visiStat == '보통'
+                        }
+                        else if (visi > 500 && visi < 999) {
+                            visiStat == '나쁨'
+                        }
+                        else if (visi > 499) {
+                            visiStat == '매우나쁨'
+                        }
+
+                        $(".visiStat").text(visiStat);
+
+                    });
+
+                    //5days 호출
+                    $.getJSON(urlForecast, function (data) {
+                        const forecastList = data.list; // 예보 데이터 배열
+                        const nowPop = data.list[0].pop
+                        $("#prep").text(`강수확률 ${nowPop}%`);
+
+                        // HTML 구조에 따라 반복적으로 데이터 채우기
+                        $(".contents-cont .array-cont").each(function (index) {
+                            if (index < forecastList.length) { // 예보 데이터의 길이만큼만 처리
+                                const forecast = forecastList[index];
+                                const time = moment(forecast.dt * 1000).format("h A"); // 시간 포맷: 2 PM, 5 PM 등
+                                const temperature = `${forecast.main.temp.toFixed(1)}°C`; // 온도
+                                let iconCode = forecast.weather[0].icon; // 날씨 아이콘 코드
+
+                                if ($(this).find(".ico-weather").length > 0) {
+                                    iconCode = iconCode.replace('n', 'd'); // n을 d로 변환
+                                }
+                                const iconPath = getCustomIconPath(iconCode); // 커스텀 아이콘 경로
+
+                                // HTML 요소에 데이터 업데이트
+                                $(this).find(".array-time").text(time); // 간단한 시간 형식 적용
+                                $(this).find(".ico-weather").attr("src", `icon/weather/${iconPath.split('/').pop()}`); // 아이콘 설정
+                                $(this).find(".temperature").text(temperature); // 온도 설정
+                            }
+                        });
+
+                    });
+
+                    //오염도 접근
+                    $.getJSON(urlPollution, function (data) {
+                        const pm10 = Math.floor(data.list[0].components.pm10);
+                        const pm25 = Math.floor(data.list[0].components.pm2_5);
+                        $("#pm10").text(pm10);
+                        $("#pm25").text(pm25);
+                    });
                 }
-            }
 
-            // 페이지 로드 후 초기화
-            getGPSCoordinates(function (result) {
-                if (result.error) {
-                    alert(result.error);
-                } else {
-                    fetchWeatherData(result.lat, result.lng);
+                //스크롤 기능부
+                const $contentsCont = $('.contents-cont');
+                let isDragging = false;
+                let startX;
+                let scrollLeft;
+
+                $contentsCont.on('mousedown', function (e) {
+                    isDragging = true;
+                    startX = e.pageX - $contentsCont.offset().left; // 마우스 시작 위치
+                    scrollLeft = $contentsCont.scrollLeft(); // 시작 시점의 스크롤 위치
+                    $contentsCont.css('cursor', 'grabbing'); // 드래그 시 커서 스타일 변경
+                });
+
+                $contentsCont.on('mouseleave mouseup', function () {
+                    isDragging = false;
+                    $contentsCont.css('cursor', 'grab'); // 드래그 해제 시 커서 스타일 변경
+                });
+
+                $contentsCont.on('mousemove', function (e) {
+                    if (!isDragging) return; // 드래그 상태가 아니면 종료
+                    e.preventDefault(); // 기본 동작 방지
+                    const x = e.pageX - $contentsCont.offset().left; // 현재 마우스 위치
+                    const walk = (x - startX) * 2; // 드래그 거리 (속도 조정 가능)
+                    $contentsCont.scrollLeft(scrollLeft - walk); // 스크롤 이동
+                });
+
+                // 자식 요소의 드래그 방지
+                $contentsCont.find('*').on('dragstart', function (e) {
+                    e.preventDefault();
+                });
+                //스크롤 종료
+
+                // GPS 좌표 가져오기
+                function getGPSCoordinates(callback) {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(
+                            function (position) {
+                                const lat = position.coords.latitude;
+                                const lng = position.coords.longitude;
+                                callback({ lat, lng });
+                            },
+                            function (error) { //오류 예외처리
+                                let errorMsg = '';
+                                switch (error.code) {
+                                    case error.PERMISSION_DENIED:
+                                        errorMsg = "위치 권한이 거부되었습니다.";
+                                        break;
+                                    case error.POSITION_UNAVAILABLE:
+                                        errorMsg = "위치 정보를 사용할 수 없습니다.";
+                                        break;
+                                    case error.TIMEOUT:
+                                        errorMsg = "위치 정보를 가져오는데 시간이 초과되었습니다.";
+                                        break;
+                                    default:
+                                        errorMsg = "알 수 없는 오류가 발생했습니다.";
+                                }
+                                callback({ error: errorMsg });
+                            }
+                        );
+                    } else {
+                        callback({ error: "브라우저에서 위치 정보를 지원하지 않습니다." });
+                    }
                 }
-            });
 
-            $(".nav p").on("click", function () {
-                // 모든 아이템에서 'nav-select' 클래스 제거
-                $(".nav p").removeClass("nav-select");
-
-                // 클릭한 아이템에 'nav-select' 클래스 추가
-                $(this).addClass("nav-select");
-            });
-
-            // 도시명을 클릭하여 새로고침
-            $('.header_center').on('click', function () {
-                $('#bigCity').text('Loading...');
+                // 페이지 로드 후 초기화
                 getGPSCoordinates(function (result) {
                     if (result.error) {
                         alert(result.error);
@@ -266,11 +522,26 @@
                         fetchWeatherData(result.lat, result.lng);
                     }
                 });
+
+                $(".nav p").on("click", function () {
+                    $(".nav p").removeClass("nav-select");
+                    $(this).addClass("nav-select");
+                });
+
+                // 도시명을 클릭하여 새로고침
+                $('.header_center').on('click', function () {
+                    $('#bigCity').text('Loading...');
+                    getGPSCoordinates(function (result) {
+                        if (result.error) {
+                            alert(result.error);
+                        } else {
+                            fetchWeatherData(result.lat, result.lng);
+                        }
+                    });
+                });
             });
-        });
 
-
-    </script>
+        </script>
 </body>
 
 </html>
