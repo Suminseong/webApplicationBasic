@@ -4,12 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.11/lottie.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment-with-locales.min.js"
-        integrity="sha512-4F1cxYdMiAW98oomSLaygEwmCnIP38pb4Kx70yQYqRwLVCs3DbRumfBq82T08g/4LJ/smbFGFpmeFlQgoDccgg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment-with-locales.min.js"integrity="sha512-4F1cxYdMiAW98oomSLaygEwmCnIP38pb4Kx70yQYqRwLVCs3DbRumfBq82T08g/4LJ/smbFGFpmeFlQgoDccgg=="crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
     <link rel="stylesheet" href="style.css" />
     <title>날씨</title>
@@ -287,24 +283,13 @@
                 $('#weekly').on('click', function () {
                     $('.container').hide();
                     $('.container2').show();
-                    $('.container3').hide();
                 });
 
                 // 오늘 예보 탭 클릭 시 container 전환
                 $('#today').on('click', function () {
                     $('.container2').hide();
-                    $('.container3').hide();
                     $('.container').show();
                 });
-
-                // 강수 예측 탭 클릭 시 container 전환
-                $('#rainCast').on('click', function () {
-                    $('.container').hide();
-                    $('.container2').hide();
-                    $('.container3').show();
-                });
-
-                let currentAnimation = null; // 현재 Lottie 애니메이션 객체를 저장하는 변수
 
                 const iconCodeMapping = { //날씨 아이콘 매핑
                     '01': 'clear_sky',
@@ -344,6 +329,9 @@
                 }
 
                 // 매핑 객체: OpenWeatherMap의 icon 코드 → Lottie 애니메이션 JSON 파일명
+
+                let currentAnimation = null; // 현재 Lottie 애니메이션 객체를 저장하는 변수
+
                 const lottieMapping = {
                     '01d': 'lottie-clear.json',
                     '01n': 'lottie-clear-night.json',
