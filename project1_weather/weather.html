@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.11/lottie.min.js"></script>
+    <title>날씨</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div id="aside">
+            <img id="ico-menu" src="menu-icon.png" alt="Menu Icon">
+        </div>
+        <div id="cityName">
+            <p id="bigCity">Incheon</p>
+            <p id="smallCity">Bupyeong-gu</p>
+        </div>
+        <div id="gps">
+            <img id="ico-gps" src="gps-icon.png" alt="GPS Icon">
+        </div>
+        <div id="settingSide">
+            <img id="ico-setting" src="setting-icon.png" alt="Settings Icon">
+        </div>
+    </header>
+
+    <div id="content">
+        <!-- 로티 애니메이션 영역 -->
+        <div id="weather-lottie"></div>
+
+        <!-- 날씨 정보 영역 -->
+        <div id="weather-info">
+            <div class="skeleton" id="temp-skeleton"></div>
+            <div class="skeleton" id="description-skeleton"></div>
+            <p id="temperature" style="display:none;"></p>
+            <p id="description" style="display:none;"></p>
+        </div>
+    </div>
+
+    <script>
+        // api에서 변수들 전부 불러오기
+    </script>
+</body>
+</html>
